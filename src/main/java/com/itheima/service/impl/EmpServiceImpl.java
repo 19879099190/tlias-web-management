@@ -1,6 +1,8 @@
 package com.itheima.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.PageResult;
@@ -27,6 +29,9 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public PageResult<Emp> page(Integer page, Integer pageSize){
         PageHelper.startPage(page,pageSize);
+        List<Emp> empList = empMapper.list();
+        Page<Emp> p = (Page<Emp>)(empList);
+        return new PageResult<Emp>(p.getTotal(),p.getResult());
     }
 
 }
